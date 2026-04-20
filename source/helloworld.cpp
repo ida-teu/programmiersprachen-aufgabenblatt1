@@ -4,7 +4,7 @@ int ggT();
 
 int main()
 {
-	std::cout << "Hallo Welt!\n" << ggT();
+	std::cout << "Moin\n" << ggT();
   return 0;
 }
 
