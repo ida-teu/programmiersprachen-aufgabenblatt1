@@ -1,5 +1,8 @@
 #define DOCTEST_CONFIG_IMPLEMENT
-#include <doctest.h>
+#include <doctest>
+#include <numbers>   
+#include <cmath>     
+
 
 // returns the value clamped between lower and upper bounds
 int clamp(int value, int lower, int upper)
@@ -103,4 +106,39 @@ int main(int argc, char* argv[])
   doctest::Context ctx;
   ctx.applyCommandLine(argc, argv);
   return ctx.run();
+}
+int gcd(int a, int b)
+{
+    // Vorzeichen ignorieren, damit gcd(−4, 2) == 2
+    a = std::abs(a);
+    b = std::abs(b);
+    while (b != 0) {
+        int remainder = a % b;
+        a = b;
+        b = remainder;
+    }
+    return a;
+}
+ 
+TEST_CASE("describe_gcd")
+{
+    // Vom Aufgabenblatt vorgegebene Tests
+    REQUIRE(gcd(2, 4) == 2);
+    REQUIRE(gcd(9, 6) == 3);
+    REQUIRE(gcd(3, 7) == 1);
+ 
+    // Sonderfälle: einer der Werte ist 0
+    REQUIRE(gcd(0, 5) == 5);
+    REQUIRE(gcd(7, 0) == 7);
+ 
+    // Negative Zahlen
+    REQUIRE(gcd(-4, 2) == 2);
+    REQUIRE(gcd(9, -3) == 3);
+ 
+    // Gleiche Zahlen
+    REQUIRE(gcd(6, 6) == 6);
+ 
+    // Zufällige Normalfälle
+    REQUIRE(gcd(48, 18) == 6);
+    REQUIRE(gcd(100, 75) == 25);
 }

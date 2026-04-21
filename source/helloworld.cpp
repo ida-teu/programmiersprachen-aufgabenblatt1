@@ -1,12 +1,17 @@
+#include <array>
+#include <cstdlib>   
 #include <iostream>
 
 int ggT();
 int pytagoras();
+int zufallszahlen();
+bool flip_a_coin();
+int interaktivermünzwurf();
 
 
 int main()
 {
-	std::cout << "Moin\n"  << ggT() << "\n" << pytagoras();
+	std::cout << "Moin\n"  << ggT() << "\n" << pytagoras() << "\n" << zufallszahlen() << "\n" << flip_a_coin() << interaktivermünzwurf();
   return 0;
 }
 
@@ -36,8 +41,61 @@ int pytagoras() {
 
             if (a*a + b*b == c*c) {
                 std::cout << "a = " << a << ", b = " << b << ", c = " << c;
-                return 0;
+                
         }
     }
 }
+}
+int zufallszahlen()
+{
+    std::array<int, 20> numbers;
+ 
+    for (int i = 0; i < 20; ++i) {
+        numbers[i] = std::rand();
+    }
+ 
+    std::cout << "Zufallszahlen:\n";
+    for (int i = 0; i < 20; ++i) {
+        std::cout << "numbers[" << i << "] = " << numbers[i] << "\n";
+    }
+    int max = numbers[0];
+    for (int i = 1; i < 20; ++i) {
+        if (numbers[i] > max) {
+            max = numbers[i];
+        }
+    }
+    std::cout << "\nGroesste Zahl: " << max << "\n";
+    long long sum = 0;
+    for (int i = 0; i < 20; ++i) {
+        sum += numbers[i];
+    }
+    double average = static_cast<double>(sum) / 20.0;
+    std::cout << "Durchschnitt:  " << average << "\n";
+}
+
+bool flip_a_coin()
+{
+    return std::rand() % 2 == 0;
+}
+ 
+// Aufgabe 1.6.2: Interaktives Programm
+int interaktivermünzwurf()
+{
+    std::cout << "Wie viele Muenzen sollen geworfen werden? ";
+    int n = 0;
+    std::cin >> n;
+ 
+    int heads = 0;
+    int tails = 0;
+ 
+    for (int i = 0; i < n; ++i) {
+        if (flip_a_coin()) {
+            ++heads;
+        } else {
+            ++tails;
+        }
+    }
+ 
+    std::cout << "#Heads Flips: " << heads << "\n";
+    std::cout << "#Tails Flips: " << tails << "\n";
 }
