@@ -166,3 +166,93 @@ TEST_CASE("describe_fract")
     REQUIRE(fract(1.1f)  == doctest::Approx(0.1f).epsilon(0.001f));
     REQUIRE(fract(99.9f) == doctest::Approx(0.9f).epsilon(0.001f));
 }
+double cylinder_volume(double radius, double height)
+{
+    return std::numbers::pi * radius * radius * height;
+}
+ 
+double cylinder_surface(double radius, double height)
+{
+    return 2.0 * std::numbers::pi * radius * (radius + height);
+}
+ 
+TEST_CASE("describe_cylinder")
+{
+    // Einheits-Zylinder: r=1, h=1
+    //   V = pi ≈ 3.14159
+    //   A = 2*pi*(1+1) = 4*pi ≈ 12.5664
+    REQUIRE(cylinder_volume(1.0, 1.0)  == doctest::Approx(3.14159265).epsilon(0.0001));
+    REQUIRE(cylinder_surface(1.0, 1.0) == doctest::Approx(12.5663706).epsilon(0.0001));
+ 
+    
+    REQUIRE(cylinder_volume(3.0, 0.0)  == doctest::Approx(0.0).epsilon(0.0001));
+    REQUIRE(cylinder_surface(3.0, 0.0) == doctest::Approx(2.0 * std::numbers::pi * 9.0).epsilon(0.0001));
+ 
+    // Sonderfall: Radius 0
+    REQUIRE(cylinder_volume(0.0, 5.0)  == doctest::Approx(0.0).epsilon(0.0001));
+    REQUIRE(cylinder_surface(0.0, 5.0) == doctest::Approx(0.0).epsilon(0.0001));
+ 
+    // Normalfall: r=2, h=5
+    //   V = pi * 4 * 5 = 20*pi ≈ 62.8318
+    //   A = 2*pi*2*(2+5) = 28*pi ≈ 87.9646
+    REQUIRE(cylinder_volume(2.0, 5.0)  == doctest::Approx(62.8318530).epsilon(0.0001));
+    REQUIRE(cylinder_surface(2.0, 5.0) == doctest::Approx(87.9645943).epsilon(0.0001));
+}
+bool is_prime(int n)
+{
+    if (n <= 1) {
+        return false;   // 0, 1 und negative Zahlen sind keine Primzahlen
+    }
+    if (n <= 3) {
+        return true;    // 2 und 3 sind Primzahlen
+    }
+    if (n % 2 == 0) {
+        return false;   // gerade Zahlen > 2 sind keine Primzahlen
+    }
+    // Nur ungerade Teiler bis sqrt(n) prüfen
+    for (int i = 3; i * i <= n; i += 2) {
+        if (n % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+ 
+TEST_CASE("describe_is_prime")
+{
+    // Sonderfälle <= 1
+    REQUIRE(is_prime(0)  == false);
+    REQUIRE(is_prime(1)  == false);
+    REQUIRE(is_prime(-7) == false);
+ 
+    // Kleinste Primzahlen
+    REQUIRE(is_prime(2)  == true);
+    REQUIRE(is_prime(3)  == true);
+ 
+    // Gerade Zahlen > 2 (keine Primzahlen)
+    REQUIRE(is_prime(4)  == false);
+    REQUIRE(is_prime(100) == false);
+ 
+    // An Sonderfälle angrenzende Werte
+    REQUIRE(is_prime(5)  == true);
+    REQUIRE(is_prime(6)  == false);
+ 
+    // Bekannte Primzahlen (normale Fälle)
+    REQUIRE(is_prime(7)   == true);
+    REQUIRE(is_prime(11)  == true);
+    REQUIRE(is_prime(13)  == true);
+    REQUIRE(is_prime(97)  == true);
+    REQUIRE(is_prime(101) == true);
+ 
+    // Bekannte Nicht-Primzahlen (zusammengesetzte Zahlen)
+    REQUIRE(is_prime(9)   == false);  // 3*3
+    REQUIRE(is_prime(15)  == false);  // 3*5
+    REQUIRE(is_prime(49)  == false);  // 7*7
+    REQUIRE(is_prime(91)  == false);  // 7*13 – klassische Falle!
+}
+int main(int argc, char* argv[])
+{
+    doctest::Context ctx;
+    ctx.applyCommandLine(argc, argv);
+    return ctx.run();
+}
