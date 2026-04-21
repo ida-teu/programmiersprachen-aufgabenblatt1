@@ -142,3 +142,27 @@ TEST_CASE("describe_gcd")
     REQUIRE(gcd(48, 18) == 6);
     REQUIRE(gcd(100, 75) == 25);
 }
+float fract(float x)
+{
+    // std::fmod entfernt den ganzzahligen Anteil; für negative Zahlen liefert es ein negatives Ergebnis, was dem mathematischen Nachkommaanteil entspricht.
+    return x - static_cast<float>(static_cast<int>(x));
+}
+ 
+TEST_CASE("describe_fract")
+{
+    // Normaler positiver Fall aus der Aufgabenstellung
+    REQUIRE(fract(7.24f) == doctest::Approx(0.24f).epsilon(0.001f));
+ 
+    // Ganze Zahlen → Nachkommaanteil 0
+    REQUIRE(fract(3.0f) == doctest::Approx(0.0f).epsilon(0.001f));
+ 
+    // Zahlen kleiner als 1
+    REQUIRE(fract(0.5f) == doctest::Approx(0.5f).epsilon(0.001f));
+ 
+    // Negative Zahlen
+    REQUIRE(fract(-2.75f) == doctest::Approx(-0.75f).epsilon(0.001f));
+ 
+    // Weitere Normalfälle
+    REQUIRE(fract(1.1f)  == doctest::Approx(0.1f).epsilon(0.001f));
+    REQUIRE(fract(99.9f) == doctest::Approx(0.9f).epsilon(0.001f));
+}
