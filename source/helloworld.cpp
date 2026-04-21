@@ -1,10 +1,12 @@
 #include <iostream>
 
 int ggT();
+int pytagoras();
+
 
 int main()
 {
-	std::cout << "Moin\n" << ggT();
+	std::cout << "Moin\n"  << ggT() << "\n" << pytagoras();
   return 0;
 }
 
@@ -26,4 +28,16 @@ int ggT() {
 		}
 		
 	}
+}
+int pytagoras() {
+    for (int a = 1; a < 1000; a++) {
+        for (int b = a + 1; b < 1000; b++) {
+            int c = 1000 - a - b;
+
+            if (a*a + b*b == c*c) {
+                std::cout << "a = " << a << ", b = " << b << ", c = " << c;
+                return 0;
+        }
+    }
+}
 }
