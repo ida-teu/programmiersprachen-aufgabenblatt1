@@ -14,7 +14,7 @@ int main()
 	std::cout << "Moin\n"  << ggT() << "\n" << pytagoras() << "\n" << zufallszahlen() << "\n" << flip_a_coin() << interaktivermünzwurf();
   return 0;
 }
-
+//1.3
 int ggT() {
 	int current_number = 20;
 	while (true) {
@@ -34,6 +34,7 @@ int ggT() {
 		
 	}
 }
+//1.4
 int pytagoras() {
     for (int a = 1; a < 1000; a++) {
         for (int b = a + 1; b < 1000; b++) {
@@ -46,6 +47,7 @@ int pytagoras() {
     }
 }
 }
+//1.5
 int zufallszahlen()
 {
     std::array<int, 20> numbers;
@@ -72,7 +74,7 @@ int zufallszahlen()
     double average = static_cast<double>(sum) / 20.0;
     std::cout << "Durchschnitt:  " << average << "\n";
 }
-
+//1.6.1
 bool flip_a_coin()
 {
     if (std::rand() % 2 == 1) {
@@ -81,7 +83,7 @@ bool flip_a_coin()
         return false;  
     }
 }
- 
+ //1.6.2
 int interaktivermünzwurf()
 {
     std::cout << "Wie viele Muenzen sollen geworfen werden? ";
