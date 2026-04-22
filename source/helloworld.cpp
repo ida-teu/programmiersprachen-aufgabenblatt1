@@ -75,7 +75,11 @@ int zufallszahlen()
 
 bool flip_a_coin()
 {
-    return std::rand() % 2 == 0;
+    if (std::rand() % 2 == 1) {
+        return true;   
+    } else {
+        return false;  
+    }
 }
  
 int interaktivermünzwurf()

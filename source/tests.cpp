@@ -1,5 +1,5 @@
 #define DOCTEST_CONFIG_IMPLEMENT
-#include <doctest>
+#include "doctest"
 #include <numbers>   
 #include <cmath>     
 
@@ -101,12 +101,6 @@ TEST_CASE("max_of_three")
   }
 }
 
-int main(int argc, char* argv[])
-{
-  doctest::Context ctx;
-  ctx.applyCommandLine(argc, argv);
-  return ctx.run();
-}
 int gcd(int a, int b)
 {
     
@@ -251,4 +245,5 @@ int main(int argc, char* argv[])
     doctest::Context ctx;
     ctx.applyCommandLine(argc, argv);
     return ctx.run();
+
 }
