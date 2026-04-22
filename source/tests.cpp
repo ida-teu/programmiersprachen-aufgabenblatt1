@@ -100,7 +100,7 @@ TEST_CASE("max_of_three")
     CHECK(max_of_three(-10, 0, -5) == 0);
   }
 }
-
+//1.8
 int gcd(int a, int b)
 {
     
@@ -136,6 +136,7 @@ TEST_CASE("describe_gcd")
     REQUIRE(gcd(48, 18) == 6);
     REQUIRE(gcd(100, 75) == 25);
 }
+//1.9
 float fract(float x)
 {
     
@@ -160,6 +161,7 @@ TEST_CASE("describe_fract")
     REQUIRE(fract(1.1f)  == doctest::Approx(0.1f).epsilon(0.001f));
     REQUIRE(fract(99.9f) == doctest::Approx(0.9f).epsilon(0.001f));
 }
+//1.10
 double cylinder_volume(double radius, double height)
 {
     return std::numbers::pi * radius * radius * height;
@@ -188,6 +190,7 @@ TEST_CASE("describe_cylinder")
     REQUIRE(cylinder_volume(2.0, 5.0)  == doctest::Approx(62.8318530).epsilon(0.0001));
     REQUIRE(cylinder_surface(2.0, 5.0) == doctest::Approx(87.9645943).epsilon(0.0001));
 }
+//1.11
 bool is_prime(int n)
 {
     if (n <= 1) {
