@@ -78,7 +78,6 @@ bool flip_a_coin()
     return std::rand() % 2 == 0;
 }
  
-// Aufgabe 1.6.2: Interaktives Programm
 int interaktivermünzwurf()
 {
     std::cout << "Wie viele Muenzen sollen geworfen werden? ";
